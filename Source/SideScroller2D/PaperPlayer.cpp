@@ -9,22 +9,38 @@
 
 APaperPlayer::APaperPlayer()
 {
-    SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
-    SpringArm->SetupAttachment(RootComponent);
-    Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
-    Camera->SetupAttachment(SpringArm, SpringArm->SocketName);
 }
 
 void APaperPlayer::BeginPlay()
 {
     Super::BeginPlay();
+
     JetpackDuration = MaxJetpackDuration;
+
+    if (CameraClass)
+    {
+        Camera = GetWorld()->SpawnActor(CameraClass);
+        ensure(Camera);
+    }
+    else
+        UE_LOG(LogTemp, Error, TEXT("Camera class is null"));
+
+
+    if (auto PlayerController = Cast<APlayerController>(GetController()))
+        PlayerController->SetViewTarget(Camera);
+    else
+        UE_LOG(LogTemp, Error, TEXT("Player Controller is null or couldn't cast to APlayerController"));
 }
 
 void APaperPlayer::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
+    if (Camera)
+        Camera->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y, Camera->GetActorLocation().Z });
+    else
+        UE_LOG(LogTemp, Error, TEXT("Camera is null"));
+    
     UpdateJetpack(DeltaTime);
     AddMovementInput(GetActorForwardVector(), 1.0);
 }

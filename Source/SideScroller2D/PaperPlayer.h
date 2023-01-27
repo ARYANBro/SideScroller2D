@@ -37,11 +37,16 @@ protected:
 	bool bJetpackActive = false;
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent* Camera;
+	// UPROPERTY(VisibleAnywhere)
+	// class UCameraComponent* Camera;
 
-	UPROPERTY(VisibleAnywhere)
-	class USpringArmComponent* SpringArm;
+	// UPROPERTY(VisibleAnywhere)
+	// class USpringArmComponent* SpringArm;
+	UPROPERTY(EditDefaultsOnly, Category = "PaperPlayer")
+	TSubclassOf<AActor> CameraClass;
+
+	UPROPERTY(VisibleAnywhere, Category = "PaperPlayer")
+	AActor* Camera;
 
 	UPROPERTY(EditDefaultsOnly, Category = "PaperPlayer")
 	float LaunchZVelocity;
@@ -54,4 +59,5 @@ private:
 
 	float JetpackDuration;
 	float OriginalAirControl;
+	FVector OriginalCameraLocation;
 };
