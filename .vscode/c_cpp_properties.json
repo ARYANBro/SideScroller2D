@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "SideScroller2DEditor Editor Win64 Development (SideScroller2D)",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_SideScroller2D.json"
+        },
+        {
+            "name": "Win32",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default.json"
+        }
+    ],
+    "version": 4
+}
