@@ -20,6 +20,8 @@ public:
 	void BeginPlay();
 	void Tick(float DeltaTime);
 
+	bool CanUpdateJetpack() { return JetpackDuration > 0.0; }
+
 private:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
@@ -27,6 +29,7 @@ private:
 	void MoveForwardBackward(float AxisValue);
 	virtual void Jump() override;
 	virtual void StopJumping() override;
+	virtual void Landed(const FHitResult& HitResult) override;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PaperPlayer")
@@ -37,11 +40,6 @@ protected:
 	bool bJetpackActive = false;
 
 private:
-	// UPROPERTY(VisibleAnywhere)
-	// class UCameraComponent* Camera;
-
-	// UPROPERTY(VisibleAnywhere)
-	// class USpringArmComponent* SpringArm;
 	UPROPERTY(EditDefaultsOnly, Category = "PaperPlayer")
 	TSubclassOf<AActor> CameraClass;
 

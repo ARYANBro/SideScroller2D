@@ -57,7 +57,7 @@ void APaperPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void APaperPlayer::UpdateJetpack(float DeltaTime)
 {
-    if (bJetpackActive)
+    if (CanUpdateJetpack() && bJetpackActive)
     {
         LaunchCharacter({ 0.0, 0.0, LaunchZVelocity }, false, true);
         JetpackDuration -= DeltaTime;
@@ -66,7 +66,6 @@ void APaperPlayer::UpdateJetpack(float DeltaTime)
     if (JetpackDuration <= 0.0)
     {
         bJetpackActive = false;
-        JetpackDuration = MaxJetpackDuration;
     }
 }
 
@@ -78,14 +77,16 @@ void APaperPlayer::MoveForwardBackward(float AxisValue)
 
 void APaperPlayer::Jump()
 {
-    if (auto MovementComponent = GetCharacterMovement(); MovementComponent->IsFalling())
+    if (auto MovementComponent = GetCharacterMovement(); MovementComponent->IsFalling() && CanUpdateJetpack())
     {
         bJetpackActive = true;
         OriginalAirControl = MovementComponent->AirControl;
         MovementComponent->AirControl = JetpackAirControl;
     }
-    else
+    else if (GetCharacterMovement()->IsWalking())
+    {
         APaperCharacter::Jump();
+    }
 }
 
 void APaperPlayer::StopJumping()
@@ -93,4 +94,10 @@ void APaperPlayer::StopJumping()
     APaperCharacter::StopJumping();
     bJetpackActive = false;
     GetCharacterMovement()->AirControl = OriginalAirControl;
+}
+
+void APaperPlayer::Landed(const FHitResult& HitResult)
+{
+    APaperCharacter::Landed(HitResult);
+    JetpackDuration = MaxJetpackDuration;
 }
