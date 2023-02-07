@@ -6,13 +6,14 @@
 #include <Camera/CameraComponent.h>
 #include <GameFramework/SpringArmComponent.h>
 #include <GameFramework/CharacterMovementComponent.h>
-
+    
 APaperPlayer::APaperPlayer()
 {
 }
 
 void APaperPlayer::BeginPlay()
 {
+    
     Super::BeginPlay();
 
     JetpackDuration = MaxJetpackDuration;
