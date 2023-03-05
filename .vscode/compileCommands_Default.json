@@ -1,9 +1,25 @@
 [
 	{
+		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\BasicZombie.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
+		],
+		"directory": "E:\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\BasicZombie.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
+		],
+		"directory": "E:\\UE_5.1\\Engine\\Source"
+	},
+	{
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\InfiniteMeshes.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -11,7 +27,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\InfiniteMeshes.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -19,7 +35,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\PaperPlayer.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -27,7 +43,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\PaperPlayer.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -35,7 +51,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\SideScroller2D.Build.cs",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -43,7 +59,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\SideScroller2D.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -51,7 +67,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\SideScroller2D.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -59,7 +75,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\SideScroller2DGameModeBase.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
@@ -67,7 +83,7 @@
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\SideScroller2DGameModeBase.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
-			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.253.rsp"
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
 		],
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	}

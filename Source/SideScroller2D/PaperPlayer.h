@@ -30,6 +30,11 @@ private:
 	virtual void Jump() override;
 	virtual void StopJumping() override;
 	virtual void Landed(const FHitResult& HitResult) override;
+	
+	virtual float TakeDamage(float DamageTaken, const struct FDamageEvent& DamageEvent, AController* EventInstigator, AActor* Causer) override;
+
+	UFUNCTION()
+	void TakeRadialDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, FVector Origin, FHitResult HitInfo, class AController* InstigatedBy, AActor* DamageCauser);
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PaperPlayer")
@@ -54,6 +59,12 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "PaperPlayer", meta = (ClampMin = "0.0", ClampMax = "1.0"))
 	float JetpackAirControl;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PaperPlayer")
+	float KnockbackStrength = 650.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "PaperPlayer")
+	float Health = 100.0f;
 
 	float JetpackDuration;
 	float OriginalAirControl;

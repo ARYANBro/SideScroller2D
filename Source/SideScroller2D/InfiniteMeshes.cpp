@@ -41,6 +41,10 @@ void AInfiniteMeshes::SpawnMeshes()
 		auto StaticMeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(SpawnParams);
 		StaticMeshActor->Tags.Add(FName(FString("Infinite Buildings ") + GetName()));
 		StaticMeshActor->SetMobility(EComponentMobility::Movable);
+		
+#if WITH_EDITOR
+		StaticMeshActor->SetFolderPath(GetFolderPath());
+#endif
 		StaticMeshActor->SetActorLocation(Spline->GetLocationAtSplinePoint(i, ESplineCoordinateSpace::World) + Transform.GetLocation());
 		StaticMeshActor->SetActorScale3D(Transform.GetScale3D());
 		StaticMeshActor->SetActorRotation(Transform.GetRotation());
@@ -86,8 +90,6 @@ void AInfiniteMeshes::Tick(float DeltaTime)
 	else if (FMath::Abs(LastSplinePointOnScreen.X - ViewportSize.X)  < ScreenDistBetweenPoints && !bSpawnedNext)
 	{
 		FVector Loc = LastSplinePoint;
-		FActorSpawnParameters SpawnParameters;
-		SpawnParameters.Template = this;
 		auto NextActor = GetWorld()->SpawnActor(GetClass(), &Loc);
 		check(NextActor);
 		bSpawnedNext = true;

@@ -40,16 +40,16 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	USplineComponent* Spline;
 
-	UPROPERTY(EditAnywhere, Category="InfiniteBuildings")
+	UPROPERTY(EditAnywhere, Category="InfiniteMeshes")
 	int NumPoints;
 
-	UPROPERTY(EditAnywhere, Category="InfiniteBuildings")
+	UPROPERTY(EditAnywhere, Category="InfiniteMeshes")
 	float DistBetweenPoints;
 
-	UPROPERTY(EditAnywhere, Category="InfiniteBuildings")
+	UPROPERTY(EditAnywhere, Category="InfiniteMeshes")
 	TArray<UStaticMesh*> Meshes;
 
-	UPROPERTY(EditAnywhere, Category="InfiniteBuildings")
+	UPROPERTY(EditAnywhere, Category="InfiniteMeshes")
 	FTransform Transform;
 
 	bool bSpawnedNext = false;
