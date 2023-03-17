@@ -32,6 +32,22 @@
 		"directory": "E:\\UE_5.1\\Engine\\Source"
 	},
 	{
+		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\Jetpack.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
+		],
+		"directory": "E:\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\Jetpack.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\.vscode\\compileCommands_Default\\SideScroller2D.255.rsp"
+		],
+		"directory": "E:\\UE_5.1\\Engine\\Source"
+	},
+	{
 		"file": "C:\\Users\\nalin\\OneDrive\\Documents\\Unreal Projects\\SideScroller2D\\Source\\SideScroller2D\\PaperPlayer.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.34.31933\\bin\\HostX64\\x64\\cl.exe",
