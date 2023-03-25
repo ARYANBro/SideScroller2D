@@ -30,10 +30,12 @@ void UJetpack::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+
 	if (bEnabled && CanUpdate())
 	{
 		RemainingJetpackDuration -= DeltaTime;
 		Owner->LaunchCharacter({ 0.0f, 0.0f, LaunchZVelocity }, false, true);
+		GEngine->AddOnScreenDebugMessage(-1, DeltaTime, FColor::Orange, "Launching player", false);
 	}
 	
 	if (RemainingJetpackDuration <= 0.0f)

@@ -28,6 +28,7 @@ public:
 	void StopJetpack();
 	void Reset();
 	bool CanUpdate() { return RemainingJetpackDuration > 0.0f; }
+	bool IsEnabled() { return bEnabled; }
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Jetpack")

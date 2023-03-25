@@ -13,12 +13,16 @@
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Engine/DamageEvents.h>
 #include <Kismet/GameplayStatics.h>
+#include <Components/BoxComponent.h>
+#include <Components/ArrowComponent.h>
     
 APaperPlayer::APaperPlayer()
 {
     Jetpack = CreateDefaultSubobject<UJetpack>(TEXT("PlayerJetpack"));
-    Jetpack->SetComponentTickEnabled(false);
     AddOwnedComponent(Jetpack);   
+#if WITH_EDITOR
+    MeleeArrow = CreateDefaultSubobject<UArrowComponent>(TEXT("Melee Arrow"));
+#endif
 }
 
 void APaperPlayer::BeginPlay()
@@ -53,32 +57,72 @@ void APaperPlayer::BeginPlay()
 void APaperPlayer::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+    TickGame(DeltaTime);
+}
 
+void APaperPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+    if (PlayerInputComponent)
+    {
+        PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &APaperPlayer::Jump);
+        PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &APaperPlayer::StopJumping);
+        PlayerInputComponent->BindAction("SplashDown", EInputEvent::IE_Pressed, this, &APaperPlayer::SplashDown);
+        PlayerInputComponent->BindAction("Melee", EInputEvent::IE_Pressed, this, &APaperPlayer::Melee);
+        PlayerInputComponent->BindAxis("MoveForwardBackward", this, &APaperPlayer::MoveForwardBackward);
+    }
+}
+
+void APaperPlayer::MoveForwardBackward(float AxisValue)
+{
+    if (bEnableMovement)
+        AddMovementInput(GetActorForwardVector(), AxisValue);
+}
+
+void APaperPlayer::Jump()
+{
+    if (auto MovementComponent = GetCharacterMovement(); MovementComponent->IsFalling() && AdditionalMovement == EAdditionalMovement::None)
+        AdditionalMovement = EAdditionalMovement::UsingJetpack;
+    else if (GetCharacterMovement()->IsWalking())
+        APaperCharacter::Jump();
+}
+
+void APaperPlayer::StopJumping()
+{
+    APaperCharacter::StopJumping();
+    AdditionalMovement = EAdditionalMovement::None;
+}
+
+
+void APaperPlayer::TickGame(float DeltaTime)
+{ 
     if (Camera)
         Camera->SetActorLocation({ GetActorLocation().X, GetActorLocation().Y, Camera->GetActorLocation().Z });
     else
         UE_LOG(LogTemp, Error, TEXT("Camera is null"));
 
-
     switch (AdditionalMovement)
     {
         case EAdditionalMovement::UsingJetpack:
-            if (!Jetpack->IsComponentTickEnabled())
-                Jetpack->SetComponentTickEnabled(true);
+            if (!Jetpack->IsEnabled())
+                Jetpack->StartJetpack();
             break;
 
         case EAdditionalMovement::SplashingDown:    
-            if (Jetpack->IsComponentTickEnabled())
-                Jetpack->SetComponentTickEnabled(false);
 
             if (CanSplashDown())
             {
+                Jetpack->StopJetpack();
                 LaunchCharacter({ 0.0f, 0.0f, SplashZVelocity }, false, true);
                 bDidSplashDown = true;
                 GetCapsuleComponent()->SetCollisionProfileName(PlayerSplashDownCollisionProfile);
                 UE_LOG(LogTemp, Log, TEXT("Splashed Down"));
             }
 
+            break;
+
+        case EAdditionalMovement::None:
+            if (Jetpack->IsEnabled())
+                Jetpack->StopJetpack();
             break;
     
     default:
@@ -108,40 +152,6 @@ void APaperPlayer::Tick(float DeltaTime)
     }
 }
 
-void APaperPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-    if (PlayerInputComponent)
-    {
-        PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &APaperPlayer::Jump);
-        PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &APaperPlayer::StopJumping);
-        PlayerInputComponent->BindAction("SplashDown", EInputEvent::IE_Pressed, this, &APaperPlayer::SplashDown);
-        PlayerInputComponent->BindAxis("MoveForwardBackward", this, &APaperPlayer::MoveForwardBackward);
-    }
-}
-
-void APaperPlayer::MoveForwardBackward(float AxisValue)
-{
-    if (bEnableMovement)
-        AddMovementInput(GetActorForwardVector(), AxisValue);
-}
-
-void APaperPlayer::Jump()
-{
-    if (auto MovementComponent = GetCharacterMovement(); MovementComponent->IsFalling() && AdditionalMovement == EAdditionalMovement::None)
-    {
-        AdditionalMovement = EAdditionalMovement::UsingJetpack;
-        Jetpack->StartJetpack();
-    }
-    else if (GetCharacterMovement()->IsWalking())
-        APaperCharacter::Jump();
-}
-
-void APaperPlayer::StopJumping()
-{
-    APaperCharacter::StopJumping();
-    Jetpack->StopJetpack();
-}
-
 void APaperPlayer::Grounded(const FHitResult& HitResult)
 {
     if (AdditionalMovement == EAdditionalMovement::SplashingDown)
@@ -154,9 +164,7 @@ void APaperPlayer::Grounded(const FHitResult& HitResult)
 void APaperPlayer::SplashDown()
 {
     if (GetCharacterMovement()->IsFalling() && AdditionalMovement == EAdditionalMovement::UsingJetpack && CanSplashDown())
-    {
         AdditionalMovement = EAdditionalMovement::SplashingDown;
-    }
 }
 
 float APaperPlayer::TakeDamage(float DamageTaken, const FDamageEvent& DamageEvent, AController* EventInstigator, AActor* Causer)
@@ -187,11 +195,6 @@ void APaperPlayer::TakeAnyDamage(AActor* DamagedActor, float Damage, const class
 
 void APaperPlayer::SplashDownGrounded_Implementation()
 {
-    if (auto PlayerController = Cast<APlayerController>(GetController()))
-        PlayerController->ClientStartCameraShake(CameraShake);
-    else
-        UE_LOG(LogTemp, Warning, TEXT("void APaperPlayer::SplashDown | PlayerController is nullptr"));
-
     TArray<FHitResult> OutHits;
     GetWorld()->SweepMultiByProfile(OutHits, GetActorLocation(), GetActorLocation(), FQuat::Identity, "Zombie_Trace", FCollisionShape::MakeSphere(SplashRadius));
     for (const FHitResult& Hit : OutHits)
@@ -208,13 +211,47 @@ void APaperPlayer::SplashDownGrounded_Implementation()
             DamageEvent.ShotDirection = Direction;
             BasicZombie->TakeDamage(DamageInflicted, DamageEvent, GetController(), this);
         }
-    }   
+    }
 
     FTimerHandle TH;
-    TFunction<void ()> Callback = [this]()
-    {
-        GetCapsuleComponent()->SetCollisionProfileName(PlayerRunCollisionProfile);
-    };
-
+    TFunction<void ()> Callback = [this]() { GetCapsuleComponent()->SetCollisionProfileName(PlayerRunCollisionProfile); };
     GetWorld()->GetTimerManager().SetTimer(TH, std::move(Callback), SplashDownResetCooldown, false);
+}
+
+void APaperPlayer::Melee_Implementation()
+{
+    UE_LOG(LogTemp, Log, TEXT("Melee"));
+    TArray<FHitResult> HitResults;
+    FVector Start = GetActorLocation();
+    FVector End = Start + GetActorForwardVector() * MeleeDistance;
+    GetWorld()->SweepMultiByProfile(HitResults, Start, End, FQuat::Identity, "MeleeProfile", FCollisionShape::MakeBox(FVector{ 100.0f, 100.0f, 100.0f }));
+    for (const FHitResult& HitResult : HitResults)
+    {
+        if (!HitResult.GetActor()->CanBeDamaged())
+        {
+            UE_LOG(LogTemp, Warning, TEXT("Actor in Melee profile cannot be damaged"));   
+            continue;
+        }
+
+        FVector Direction = FVector(0.0f, 0.0f, 1.0f);
+        Direction += (HitResult.GetActor()->GetActorLocation() - GetActorLocation()).GetSafeNormal2D();
+        Direction.Normalize();
+
+        FPointDamageEvent DamageEvent;
+        DamageEvent.HitInfo = HitResult;
+        DamageEvent.Damage = DamageInflicted;
+        DamageEvent.ShotDirection = Direction;
+        HitResult.GetActor()->TakeDamage(DamageInflicted, DamageEvent, GetController(), this);
+    }
+
+    bHit = HitResults.Num() > 0;
+}
+
+
+void APaperPlayer::OnConstruction(const FTransform& Transform)
+{
+#if WITH_EDITOR
+    MeleeArrow->SetWorldRotation(GetActorForwardVector().Rotation());
+    MeleeArrow->ArrowLength = MeleeDistance;
+#endif
 }

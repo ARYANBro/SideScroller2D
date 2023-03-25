@@ -31,34 +31,37 @@ public:
 
 	void BeginPlay();
 	void Tick(float DeltaTime);
-
+	bool CanTakeDamage() const { return !bTookDamage; }
+	bool CanSplashDown() const { return !bDidSplashDown; }
 private:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
-	void MoveForwardBackward(float AxisValue);
+	virtual void MoveForwardBackward(float AxisValue);
 	virtual void Jump() override;
 	virtual void StopJumping() override;
+	virtual void TickGame(float DeltaTime);
 
 	UFUNCTION()
 	void Grounded(const FHitResult& HitResult);
 
-	void SplashDown();
+	virtual void SplashDown();
 	
 	virtual float TakeDamage(float DamageTaken, const struct FDamageEvent& DamageEvent, AController* EventInstigator, AActor* Causer) override;
 
 	UFUNCTION()
 	void TakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
-
-	bool CanTakeDamage() const { return !bTookDamage; }
-	bool CanSplashDown() const { return !bDidSplashDown; }
-
 protected:
 	UFUNCTION(BlueprintNativeEvent)
 	void SplashDownGrounded();
 
+	UFUNCTION(BlueprintNativeEvent)
+	void Melee();
+
 private:
 	virtual void SplashDownGrounded_Implementation();
+	virtual void Melee_Implementation();
 
+	virtual void OnConstruction(const FTransform& Transform);
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PaperPlayer")
 	bool bEnableMovement;
@@ -66,10 +69,10 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "PaperPlayer")
 	TEnumAsByte<EAdditionalMovement::Type> AdditionalMovement = EAdditionalMovement::None;
 
-private:
-	UPROPERTY(EditAnywhere, Category = "Camera")
-	TSubclassOf<class UCameraShakeBase> CameraShake;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "PaperPlayer")
+	bool bHit = false;
 
+private:
 	UPROPERTY(EditAnywhere, Category = "Camera")
 	TSubclassOf<AActor> CameraClass;
 
@@ -114,6 +117,13 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "PaperPlayer")
 	FName PlayerSplashDownCollisionProfile;
+
+	UPROPERTY(EditAnywhere, Category = "PaperPlayer")
+	float MeleeDistance = 100.0f;
+
+#if WITH_EDITOR
+	class UArrowComponent* MeleeArrow;
+#endif
 
 	float CurrentDamageCooldown;
 	float CurrentSplashDownCooldown;

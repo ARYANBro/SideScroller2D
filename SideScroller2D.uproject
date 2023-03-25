@@ -12,6 +12,11 @@
 				"Paper2D",
 				"Engine"
 			]
+		},
+		{
+			"Name": "SideScroller2DEditor",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
 		}
 	],
 	"Plugins": [

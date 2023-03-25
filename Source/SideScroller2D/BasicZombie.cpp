@@ -39,10 +39,14 @@ void ABasicZombie::Tick(float DeltaTime)
 }
 
 float ABasicZombie::TakeDamage(float Damage, const FDamageEvent& DamageEvent, AController* EventInstigator, AActor* Causer)
-{
+{   
     float DamageTaken = APaperCharacter::TakeDamage(Damage, DamageEvent, EventInstigator, Causer);
     DamageTaken = FMath::Min(Health, Damage);
     Health -= DamageTaken;
+    
+    if (Health <= 0.0f)
+        GetCapsuleComponent()->SetCollisionProfileName("IgnoreOnlyPawn");
+
     return DamageTaken;
 }
 

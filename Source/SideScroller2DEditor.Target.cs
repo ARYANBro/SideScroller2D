@@ -11,5 +11,6 @@ public class SideScroller2DEditorTarget : TargetRules
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_1;
 		ExtraModuleNames.Add("SideScroller2D");
+		ExtraModuleNames.Add("SideScroller2DEditor");
 	}
 }
